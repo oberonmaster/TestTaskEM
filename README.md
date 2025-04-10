@@ -28,20 +28,79 @@
 
 ## Установка и запуск
 
-```bash
 # Клонируйте репозиторий
-git clone https://github.com/your-username/barter-platform.git
-cd barter-platform
+    git clone https://github.com/oberonmaster/TestTaskEM
+    cd TestTaskEM
 
 # Создайте виртуальное окружение
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+    python -m venv .venv
+    source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 # Установите зависимости
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 # Выполните миграции
-python manage.py migrate
+    python manage.py migrate
 
 # Запустите сервер
-python manage.py runserver
+    python manage.py runserver 
+
+---
+
+## Пользовательский интерфейс
+
+- Главная: `/` — список объявлений
+- Создание объявления: `/ads/create/`
+- Вход / Регистрация: `/login/`, `/register/`
+- Создание и просмотр предложений: `/proposals/`
+
+---
+
+## Запуск тестов
+
+    python manage.py test ads
+
+---
+
+## REST API
+
+Документация доступна по адресу:
+
+- Swagger UI: [http://localhost:8000/api/schema/swagger-ui/](http://localhost:8000/api/schema/swagger-ui/)
+- OpenAPI JSON: [http://localhost:8000/api/schema/](http://localhost:8000/api/schema/)
+
+Доступные ресурсы:
+
+- `GET /api/ads/` — список объявлений с фильтрацией
+- `POST /api/ads/` — создание объявления
+- `PUT /api/ads/{id}/` — обновление
+- `DELETE /api/ads/{id}/` — удаление
+
+- `POST /api/proposals/` — отправка предложения обмена
+- `PUT /api/proposals/{id}/` — обновление статуса
+- `GET /api/proposals/` — фильтрация по отправителю/получателю/статусу
+
+---
+
+## Структура проекта
+
+    barter_platform/
+    ├── ads/                # Основное приложение
+    │   ├── models.py       # Модели Ad и ExchangeProposal
+    │   ├── views.py        # Класс-based views для CRUD
+    │   ├── serializers.py  # DRF сериализаторы
+    │   ├── forms.py        # Django формы
+    │   ├── urls.py         # Маршруты приложения
+    │   ├── templates/      # HTML-шаблоны
+    │   ├── tests.py        # Unit-тесты
+    │   └── api/            # API views
+    │
+    ├── barter_platform/    # Конфигурация проекта
+    ├── manage.py
+    └── requirements.txt
+
+---
+
+## Автор
+
+Разработано в рамках тестового задания.
