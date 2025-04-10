@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Объявления</h2>
+<a href="{% url 'ad_create' %}">Создать новое объявление</a>
+<ul>
+  {% for ad in ads %}
+    <li>
+      <strong>{{ ad.title }}</strong> ({{ ad.category }}) — {{ ad.condition }}
+      <br>{{ ad.description|truncatewords:20 }}
+      <br>
+      <a href="{% url 'ad_edit' ad.pk %}">Редактировать</a> |
+      <a href="{% url 'ad_delete' ad.pk %}">Удалить</a>
+    </li>
+  {% empty %}
+    <li>Нет объявлений.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
